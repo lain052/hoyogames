@@ -1,6 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <style>
+        .main-nav {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 18px 0 8px 0;
+            background: rgba(10, 14, 42, 0.85);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 16px 0 rgba(138,79,255,0.08);
+        }
+        .nav-item {
+            cursor: pointer;
+            border-radius: 50%;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 0 0 0 transparent;
+            padding: 4px;
+        }
+        .nav-item.active, .nav-item:hover {
+            box-shadow: 0 0 16px 0 #8a4fff44;
+            transform: scale(1.08);
+        }
+        .nav-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #8a4fff;
+            background: #fff;
+        }
+        @media (max-width: 768px) {
+            .main-nav {
+                gap: 18px;
+                padding: 10px 0 4px 0;
+            }
+            .nav-avatar {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>崩坏：星穹铁道 - 星神宇宙</title>
@@ -286,8 +331,19 @@
     </style>
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-item" title="原神">
+            <img src="https://uploadstatic.mihoyo.com/contentweb/20200319/2020031919433697732.png" alt="原神" class="nav-avatar">
+        </div>
+        <div class="nav-item active" title="崩坏：星穹铁道" onclick="window.location.href='index.html'">
+            <img src="https://act-webstatic.mihoyo.com/upload/contentweb/2023/03/23/7b7e2e2b7e7e2e2b7e7e2e2b7e7e2e2b.png" alt="崩坏：星穹铁道" class="nav-avatar">
+        </div>
+        <div class="nav-item" title="绝区零">
+            <img src="https://act-webstatic.mihoyo.com/upload/contentweb/2022/05/13/7b7e2e2b7e7e2e2b7e7e2e2b7e7e2e2b.png" alt="绝区零" class="nav-avatar">
+        </div>
+    </nav>
     <div class="particles" id="particles"></div>
-    <div class="container">
+    <div class="container" style="padding-top:80px;">
         <header>
             <div class="logo">崩坏：星穹铁道</div>
             <div class="subtitle">探索星神宇宙 · 揭开星际传说</div>
