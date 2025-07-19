@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝区零 - 新艾利都世界观</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1f2a 0%, #2a2e4b 100%);
+            color: #e0e0ff;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        .main-nav {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 18px 0 8px 0;
+            background: rgba(10, 14, 42, 0.85);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 16px 0 rgba(138,79,255,0.08);
+        }
+        .nav-item {
+            cursor: pointer;
+            border-radius: 50%;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 0 0 0 transparent;
+            padding: 4px;
+        }
+        .nav-item.active, .nav-item:hover {
+            box-shadow: 0 0 16px 0 #aaaaff44;
+            transform: scale(1.08);
+        }
+        .nav-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #aaaaff;
+            background: #fff;
+        }
+        @media (max-width: 768px) {
+            .main-nav {
+                gap: 18px;
+                padding: 10px 0 4px 0;
+            }
+            .nav-avatar {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 40px 20px;
+        }
+        .title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #aaaaff, #4fc3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #a0a0ff;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        .zzz-section {
+            background: rgba(30, 40, 80, 0.85);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px 0 #aaaaff22;
+            padding: 32px 28px 24px 28px;
+            margin-bottom: 32px;
+            border: 1.5px solid #aaaaff44;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #aaaaff;
+            margin-bottom: 12px;
+        }
+        .section-content {
+            color: #e0e0ff;
+            font-size: 1.08rem;
+            line-height: 1.8;
+        }
+        .factions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 18px;
+        }
+        .faction-card {
+            background: rgba(60, 70, 120, 0.85);
+            border-radius: 12px;
+            padding: 18px 16px;
+            min-width: 220px;
+            flex: 1 1 220px;
+            box-shadow: 0 2px 12px 0 #aaaaff22;
+        }
+        .faction-title {
+            color: #4fc3ff;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .faction-desc {
+            color: #e0e0ff;
+            font-size: 0.98rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-item" title="返回主页" onclick="window.location.href='index.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <i class="fas fa-home nav-avatar" style="font-size:32px;display:flex;align-items:center;justify-content:center;background:#fff;"></i>
+            <span class="img-source">返回主页</span>
+        </div>
+        <div class="nav-item" title="原神" onclick="window.location.href='genshin.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/genshin.png" alt="原神" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+        <div class="nav-item" title="崩坏：星穹铁道" onclick="window.location.href='star-rail.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/starrail.png" alt="崩坏：星穹铁道" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+        <div class="nav-item active" title="绝区零" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/zzz.png" alt="绝区零" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="title">绝区零 · 新艾利都世界观</div>
+        <div class="subtitle">探索“空洞”灾变下的都市与势力</div>
+        <div class="zzz-section">
+            <div class="section-title">新艾利都</div>
+            <div class="section-content">
+                新艾利都是一座在“空洞”灾变后幸存下来的现代都市。城市被高墙环绕，内部科技与娱乐业高度发达，但外部世界危机四伏。新艾利都成为人类最后的避风港之一。
+            </div>
+        </div>
+        <div class="zzz-section">
+            <div class="section-title">空洞与以太</div>
+            <div class="section-content">
+                “空洞”是突如其来的灾变空间，内部充满危险怪物和未知现象。以太能量是空洞中的特殊资源，既是危机也是机遇。部分人类通过“以太”获得特殊能力，被称为“绳匠”。
+            </div>
+        </div>
+        <div class="zzz-section">
+            <div class="section-title">主要势力</div>
+            <div class="factions">
+                <div class="faction-card">
+                    <div class="faction-title">绳匠</div>
+                    <div class="faction-desc">活跃在空洞边缘的特殊职业者，负责探索、清理空洞、回收资源。绳匠拥有以太能力，是新艾利都对抗空洞威胁的中坚力量。</div>
+                </div>
+                <div class="faction-card">
+                    <div class="faction-title">空洞调查局</div>
+                    <div class="faction-desc">官方机构，负责空洞研究、城市安全与秩序维护。拥有强大武装与科技支持。</div>
+                </div>
+                <div class="faction-card">
+                    <div class="faction-title">黑市与帮派</div>
+                    <div class="faction-desc">新艾利都地下势力，活跃于以太交易、情报贩卖等灰色地带。部分帮派与绳匠合作，部分则与官方对立。</div>
+                </div>
+            </div>
+        </div>
+        <div class="zzz-section">
+            <div class="section-title">主角团体</div>
+            <div class="section-content">
+                玩家将扮演绳匠，与各色同伴组队，深入空洞，揭开灾变背后的真相，守护新艾利都的未来。
+            </div>
+        </div>
+    </div>
+</body>
+</html>
