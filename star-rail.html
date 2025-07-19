@@ -6,6 +6,53 @@
     <title>崩坏：星穹铁道 - 星神宇宙</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 主导航悬浮按钮样式 */
+        .main-nav-fab {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #0a0e2a 60%, #8a4fff 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px 0 #8a4fff44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .main-nav-fab:hover {
+            box-shadow: 0 4px 24px 0 #8a4fff88;
+            background: linear-gradient(135deg, #8a4fff 60%, #0a0e2a 100%);
+        }
+        .main-nav-fab i {
+            color: #fff;
+            font-size: 2rem;
+        }
+        .main-nav-popup {
+            position: fixed;
+            top: 24px;
+            left: 90px;
+            background: rgba(10,14,42,0.98);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px 0 #8a4fff33;
+            padding: 18px 24px 12px 24px;
+            z-index: 210;
+            display: none;
+            flex-direction: row;
+            gap: 32px;
+            align-items: center;
+            animation: fadeIn 0.2s;
+        }
+        .main-nav-popup.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .main-nav {
             width: 100vw;
             display: flex;
@@ -32,8 +79,8 @@
             transform: scale(1.08);
         }
         .nav-avatar {
-            width: 48px;
-            height: 48px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #8a4fff;
@@ -46,8 +93,8 @@
                 padding: 10px 0 4px 0;
             }
             .nav-avatar {
-                width: 32px;
-                height: 32px;
+                width: 28px;
+                height: 28px;
             }
         }
         body {
@@ -245,7 +292,10 @@
     </style>
 </head>
 <body>
-    <nav class="main-nav">
+    <div class="main-nav-fab" id="mainNavFab" title="展开主导航">
+        <i class="fas fa-bars"></i>
+    </div>
+    <nav class="main-nav-popup" id="mainNavPopup">
         <div class="nav-item" title="返回主页" onclick="window.location.href='index.html'" style="display:flex;flex-direction:column;align-items:center;">
             <i class="fas fa-home nav-avatar" style="font-size:32px;display:flex;align-items:center;justify-content:center;background:#fff;"></i>
             <span class="img-source">返回主页</span>
@@ -263,8 +313,36 @@
             <span class="img-source"></span>
         </div>
     </nav>
+    <nav class="sub-nav" style="width:100vw;display:flex;justify-content:center;align-items:center;gap:32px;padding:8px 0 8px 0;background:rgba(30,20,60,0.85);position:fixed;top:24px;left:90px;z-index:99;box-shadow:0 2px 8px 0 rgba(138,79,255,0.05);font-size:1.08rem;">
+        <div class="sub-nav-item" style="cursor:pointer;color:#8a4fff;padding:4px 18px;border-radius:8px;transition:background 0.2s;" onclick="alert('敬请期待：星神图鉴')">
+            星神图鉴
+        </div>
+        <div class="sub-nav-item" style="cursor:pointer;color:#4fc3ff;padding:4px 18px;border-radius:8px;transition:background 0.2s;" onclick="alert('敬请期待：宇宙势力')">
+            宇宙势力
+        </div>
+        <div class="sub-nav-item" style="cursor:pointer;color:#aaaaff;padding:4px 18px;border-radius:8px;transition:background 0.2s;" onclick="alert('敬请期待：星际传说')">
+            星际传说
+        </div>
+    </nav>
     <div class="particles" id="particles"></div>
-    <div class="container" style="padding-top:120px;">
+    <div class="container" style="padding-top:80px;">
+    <script>
+    // 主导航悬浮按钮弹窗逻辑
+    const fab = document.getElementById('mainNavFab');
+    const popup = document.getElementById('mainNavPopup');
+    let navOpen = false;
+    fab.addEventListener('click', function(e) {
+        navOpen = !navOpen;
+        popup.classList.toggle('active', navOpen);
+        e.stopPropagation();
+    });
+    document.addEventListener('click', function(e) {
+        if (navOpen && !popup.contains(e.target) && e.target !== fab) {
+            popup.classList.remove('active');
+            navOpen = false;
+        }
+    });
+    </script>
         <header>
             <div class="logo">崩坏：星穹铁道</div>
             <div class="subtitle">探索星神宇宙 · 揭开星际传说</div>

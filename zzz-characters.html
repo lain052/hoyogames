@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝区零 - 角色档案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1f2a 0%, #2a2e4b 100%);
+            color: #e0e0ff;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        .main-nav-fab {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #1a1f2a 60%, #aaaaff 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px 0 #aaaaff44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .main-nav-fab:hover {
+            box-shadow: 0 4px 24px 0 #aaaaff88;
+            background: linear-gradient(135deg, #aaaaff 60%, #1a1f2a 100%);
+        }
+        .main-nav-fab i {
+            color: #fff;
+            font-size: 2rem;
+        }
+        .main-nav-popup {
+            position: fixed;
+            top: 24px;
+            left: 90px;
+            background: rgba(10,14,42,0.98);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px 0 #aaaaff33;
+            padding: 18px 24px 12px 24px;
+            z-index: 210;
+            display: none;
+            flex-direction: row;
+            gap: 32px;
+            align-items: center;
+            animation: fadeIn 0.2s;
+        }
+        .main-nav-popup.active {
+            display: flex;
+        }
+        .nav-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #aaaaff;
+            background: #fff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .nav-avatar {
+                width: 28px;
+                height: 28px;
+            }
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 20px 40px 20px;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #aaaaff, #4fc3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 32px;
+        }
+        .character-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 36px;
+            justify-content: center;
+        }
+        .character-card {
+            background: rgba(30, 40, 80, 0.92);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px 0 #aaaaff22;
+            padding: 28px 24px 18px 24px;
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1.5px solid #aaaaff44;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .character-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 32px 0 #aaaaff55;
+        }
+        .character-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8a4fff;
+            margin-bottom: 18px;
+            background: #fff;
+        }
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #aaaaff;
+        }
+        .character-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .character-attr, .character-role {
+            font-size: 0.98rem;
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #fff;
+            background: #4fc3ff44;
+        }
+        .character-attr.electric { background: linear-gradient(90deg,#6cf 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-attr.physical { background: linear-gradient(90deg,#aaaaff 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-attr.aether { background: linear-gradient(90deg,#8a4fff 60%,#e0e0ff 100%); color:#fff; }
+        .character-attr.fire { background: linear-gradient(90deg,#ff7b39 60%,#e0e0ff 100%); color:#fff; }
+        .character-attr.ice { background: linear-gradient(90deg,#4fc3ff 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-role.assault { background: linear-gradient(90deg,#ff7b39 60%,#e0e0ff 100%); color:#fff; }
+        .character-role.support { background: linear-gradient(90deg,#4fc3ff 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-role.abnormal { background: linear-gradient(90deg,#ff7bac 60%,#e0e0ff 100%); color:#fff; }
+        .character-role.break { background: linear-gradient(90deg,#aaaaff 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-role.critical { background: linear-gradient(90deg,#8a4fff 60%,#e0e0ff 100%); color:#fff; }
+        .character-role.defense { background: linear-gradient(90deg,#6cf 60%,#e0e0ff 100%); color:#1a1f2a; }
+        .character-desc {
+            color: #e0e0ff;
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-nav-fab" id="mainNavFab" title="展开主导航">
+        <i class="fas fa-bars"></i>
+    </div>
+    <nav class="main-nav-popup" id="mainNavPopup">
+        <div class="nav-item" title="返回主页" onclick="window.location.href='index.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <i class="fas fa-home nav-avatar" style="font-size:32px;display:flex;align-items:center;justify-content:center;background:#fff;"></i>
+            <span class="img-source">返回主页</span>
+        </div>
+        <div class="nav-item" title="原神" onclick="window.location.href='genshin.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/genshin.png" alt="原神" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+        <div class="nav-item" title="崩坏：星穹铁道" onclick="window.location.href='star-rail.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/starrail.png" alt="崩坏：星穹铁道" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+        <div class="nav-item active" title="绝区零" onclick="window.location.href='zzz.html'" style="display:flex;flex-direction:column;align-items:center;">
+            <img src="sources/zzz.png" alt="绝区零" class="nav-avatar">
+            <span class="img-source"></span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="title">绝区零 · 角色档案</div>
+        <!-- 分类筛选区 -->
+        <div id="filterBar" style="display:flex;justify-content:center;gap:32px;margin-bottom:24px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="character-attr electric" data-attr="electric" onclick="filterAttr(this)">电</span>
+                <span class="character-attr physical" data-attr="physical" onclick="filterAttr(this)">物理</span>
+                <span class="character-attr aether" data-attr="aether" onclick="filterAttr(this)">以太</span>
+                <span class="character-attr fire" data-attr="fire" onclick="filterAttr(this)">火</span>
+                <span class="character-attr ice" data-attr="ice" onclick="filterAttr(this)">冰</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="character-role assault" data-role="assault" onclick="filterRole(this)">强攻</span>
+                <span class="character-role support" data-role="support" onclick="filterRole(this)">支援</span>
+                <span class="character-role abnormal" data-role="abnormal" onclick="filterRole(this)">异常</span>
+                <span class="character-role break" data-role="break" onclick="filterRole(this)">击破</span>
+                <span class="character-role critical" data-role="critical" onclick="filterRole(this)">命破</span>
+                <span class="character-role defense" data-role="defense" onclick="filterRole(this)">防护</span>
+            </div>
+            <button id="clearFilterBtn" style="margin-left:16px;padding:4px 16px;border-radius:8px;border:none;background:#4fc3ff;color:#fff;font-weight:600;cursor:pointer;">重置筛选</button>
+        </div>
+        <div class="character-list" id="characterList">
+            <div class="character-card" data-attr="electric" data-role="assault">
+                <img class="character-avatar" src="sources/zzz.png" alt="安东">
+                <div class="character-name">安东</div>
+                <div class="character-meta">
+                    <span class="character-attr electric">电</span>
+                    <span class="character-role assault">强攻</span>
+                </div>
+                <div class="character-desc">热血的绳匠少年，擅长近战格斗，性格阳光开朗。</div>
+            </div>
+            <div class="character-card" data-attr="physical" data-role="break">
+                <img class="character-avatar" src="sources/zzz.png" alt="比利">
+                <div class="character-name">比利</div>
+                <div class="character-meta">
+                    <span class="character-attr physical">物理</span>
+                    <span class="character-role break">击破</span>
+                </div>
+                <div class="character-desc">神枪手，行动敏捷，幽默风趣，是团队的气氛担当。</div>
+            </div>
+            <div class="character-card" data-attr="aether" data-role="support">
+                <img class="character-avatar" src="sources/zzz.png" alt="妮可">
+                <div class="character-name">妮可</div>
+                <div class="character-meta">
+                    <span class="character-attr aether">以太</span>
+                    <span class="character-role support">支援</span>
+                </div>
+                <div class="character-desc">情报专家，擅长黑客技术，机智灵巧，善于收集信息。</div>
+            </div>
+            <div class="character-card" data-attr="ice" data-role="defense">
+                <img class="character-avatar" src="sources/zzz.png" alt="安比">
+                <div class="character-name">安比</div>
+                <div class="character-meta">
+                    <span class="character-attr ice">冰</span>
+                    <span class="character-role defense">防护</span>
+                </div>
+                <div class="character-desc">沉着冷静的少女，拥有强大以太能力，是团队的主心骨。</div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // 分类筛选功能
+    let selectedAttr = null;
+    let selectedRole = null;
+    function filterAttr(el) {
+        // 切换选中
+        document.querySelectorAll('[data-attr]').forEach(e => e.classList.remove('selected'));
+        if (selectedAttr === el.getAttribute('data-attr')) {
+            selectedAttr = null;
+        } else {
+            selectedAttr = el.getAttribute('data-attr');
+            el.classList.add('selected');
+        }
+        filterCharacters();
+    }
+    function filterRole(el) {
+        document.querySelectorAll('[data-role]').forEach(e => e.classList.remove('selected'));
+        if (selectedRole === el.getAttribute('data-role')) {
+            selectedRole = null;
+        } else {
+            selectedRole = el.getAttribute('data-role');
+            el.classList.add('selected');
+        }
+        filterCharacters();
+    }
+    function filterCharacters() {
+        document.querySelectorAll('.character-card').forEach(card => {
+            const attr = card.getAttribute('data-attr');
+            const role = card.getAttribute('data-role');
+            let show = true;
+            if (selectedAttr && attr !== selectedAttr) show = false;
+            if (selectedRole && role !== selectedRole) show = false;
+            card.style.display = show ? '' : 'none';
+        });
+    }
+    document.getElementById('clearFilterBtn').onclick = function() {
+        selectedAttr = null;
+        selectedRole = null;
+        document.querySelectorAll('[data-attr], [data-role]').forEach(e => e.classList.remove('selected'));
+        filterCharacters();
+    };
+    // 主导航悬浮按钮弹窗逻辑
+    const fab = document.getElementById('mainNavFab');
+    const popup = document.getElementById('mainNavPopup');
+    let navOpen = false;
+    fab.addEventListener('click', function(e) {
+        navOpen = !navOpen;
+        popup.classList.toggle('active', navOpen);
+        e.stopPropagation();
+    });
+    document.addEventListener('click', function(e) {
+        if (navOpen && !popup.contains(e.target) && e.target !== fab) {
+            popup.classList.remove('active');
+            navOpen = false;
+        }
+    });
+    </script>
+    <style>
+    /* 筛选选中态样式 */
+    .character-attr.selected, .character-role.selected {
+        outline: 2.5px solid #fff;
+        box-shadow: 0 0 8px #4fc3ff99;
+        filter: brightness(1.15);
+    }
+    </style>
+</body>
+</html>
